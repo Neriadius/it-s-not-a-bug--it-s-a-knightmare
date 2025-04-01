@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://4kndp1xv8qkc"]
+
+[ext_resource type="Script" uid="uid://d2uxv8ssanogd" path="res://character_body_2d.gd" id="1_ay8nf"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="2_p4hfe"]
+[ext_resource type="PackedScene" uid="uid://bqynjoupxrybq" path="res://Player/character_body_2d.tscn" id="3_icguf"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_ay8nf")
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("2_p4hfe")]
+offset_left = 19.0
+offset_top = 314.0
+offset_right = 319.0
+offset_bottom = 614.0
+
+[node name="Player" parent="." instance=ExtResource("3_icguf")]
+position = Vector2(237, 169)
