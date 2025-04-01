@@ -1,17 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://4kndp1xv8qkc"]
 
-[ext_resource type="Script" uid="uid://d2uxv8ssanogd" path="res://character_body_2d.gd" id="1_ay8nf"]
-[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="2_p4hfe"]
-[ext_resource type="PackedScene" uid="uid://bqynjoupxrybq" path="res://Player/character_body_2d.tscn" id="3_icguf"]
+[ext_resource type="PackedScene" uid="uid://1ydcq6n23anp" path="res://Player/Player.tscn" id="1_2iku5"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="2_irl7s"]
+
+[sub_resource type="TileSet" id="TileSet_irl7s"]
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_ay8nf")
 
-[node name="Virtual Joystick" parent="." instance=ExtResource("2_p4hfe")]
-offset_left = 19.0
-offset_top = 314.0
-offset_right = 319.0
-offset_bottom = 614.0
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_irl7s")
+format = 2
 
-[node name="Player" parent="." instance=ExtResource("3_icguf")]
-position = Vector2(237, 169)
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_2iku5")]
+position = Vector2(575, 323)
+scale = Vector2(0.982814, 1.01555)
+
+[node name="Virtual Joystick" parent="CharacterBody2D" instance=ExtResource("2_irl7s")]
+offset_left = -579.967
+offset_top = 24.6173
+offset_right = -279.967
+offset_bottom = 324.617
