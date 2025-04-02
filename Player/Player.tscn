@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://1ydcq6n23anp"]
+[gd_scene load_steps=55 format=3 uid="uid://1ydcq6n23anp"]
 
 [ext_resource type="Script" uid="uid://di4pyydlqn77h" path="res://Player/player.gd" id="1_q3lat"]
 [ext_resource type="Texture2D" uid="uid://df6wnv4ogbxvv" path="res://Player/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_q3lat"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://c5ukko26y8b80" path="res://Player/Colour2/NoOutline/120x80_PNGSheets/_Dash.png" id="4_j23h2"]
 [ext_resource type="Texture2D" uid="uid://cyg1aka4s5uog" path="res://Player/Colour2/NoOutline/120x80_PNGSheets/_Death.png" id="5_0j2ni"]
 [ext_resource type="Texture2D" uid="uid://bshhftfye5skv" path="res://Player/Colour2/NoOutline/120x80_PNGSheets/_Run.png" id="7_v0k0e"]
+[ext_resource type="Texture2D" uid="uid://b2ogi0p2qt6x5" path="res://Assets/keybord and controller icons/individual sprites/controller/controller button 43.png" id="8_s1rgi"]
+[ext_resource type="Texture2D" uid="uid://qv07bugm5b1h" path="res://Assets/keybord and controller icons/individual sprites/controller/controller button 46.png" id="9_0j2ni"]
+[ext_resource type="Texture2D" uid="uid://dlsyktte042ts" path="res://Assets/keybord and controller icons/individual sprites/controller/controller button 45.png" id="10_v0k0e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p7tob"]
 radius = 1.10099
@@ -344,7 +347,7 @@ script = ExtResource("1_q3lat")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.84217e-14, -1.7053e-13)
-scale = Vector2(0.908269, 0.908269)
+scale = Vector2(4.32119, 4.32119)
 shape = SubResource("CapsuleShape2D_p7tob")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
@@ -355,26 +358,59 @@ animation = &"Idle"
 autoplay = "Idle"
 frame_progress = 0.276104
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(11.62, 11.62)
+[node name="Camera2D" type="Camera2D" parent="CollisionShape2D"]
+position = Vector2(-3.12922e-14, 1.87753e-13)
+scale = Vector2(1.101, 1.101)
+zoom = Vector2(2.045, 2.045)
 
-[node name="UP" type="TouchScreenButton" parent="."]
-position = Vector2(-29, 13)
+[node name="Control" type="Node2D" parent="CollisionShape2D"]
+position = Vector2(-3.12922e-14, 1.87753e-13)
+scale = Vector2(1.101, 1.101)
 
-[node name="Right" type="TouchScreenButton" parent="."]
-position = Vector2(-24, 16)
+[node name="UP" type="TouchScreenButton" parent="CollisionShape2D/Control"]
+position = Vector2(-19, 13)
+scale = Vector2(-0.232, -0.232)
+texture_normal = ExtResource("8_s1rgi")
+action = "up"
 
-[node name="Left" type="TouchScreenButton" parent="."]
-position = Vector2(-34, 16)
+[node name="Right" type="TouchScreenButton" parent="CollisionShape2D/Control"]
+position = Vector2(-32, 10)
+scale = Vector2(0.231523, 0.231523)
+texture_normal = ExtResource("9_0j2ni")
+action = "right"
 
-[node name="Down" type="TouchScreenButton" parent="."]
-position = Vector2(-29, 20)
+[node name="Left" type="TouchScreenButton" parent="CollisionShape2D/Control"]
+position = Vector2(-50, 10)
+scale = Vector2(0.232, 0.232)
+texture_normal = ExtResource("10_v0k0e")
+action = "left"
 
-[node name="Attack" type="TouchScreenButton" parent="."]
+[node name="Down" type="TouchScreenButton" parent="CollisionShape2D/Control"]
+position = Vector2(-41, 17)
+scale = Vector2(0.232145, 0.232145)
+texture_normal = ExtResource("8_s1rgi")
+action = "down"
+
+[node name="Attack" type="TouchScreenButton" parent="CollisionShape2D/Control"]
 position = Vector2(34, 13)
+action = "attack"
 
-[node name="Glitch" type="TouchScreenButton" parent="."]
+[node name="Glitch" type="TouchScreenButton" parent="CollisionShape2D/Control"]
 position = Vector2(29, 19)
+action = "glitch"
 
-[node name="Bag" type="TouchScreenButton" parent="."]
+[node name="Bag" type="TouchScreenButton" parent="CollisionShape2D/Control"]
 position = Vector2(38, 19)
+action = "bag"
+
+[connection signal="pressed" from="CollisionShape2D/Control/UP" to="." method="_on_up_pressed"]
+[connection signal="released" from="CollisionShape2D/Control/UP" to="." method="_on_up_released"]
+[connection signal="pressed" from="CollisionShape2D/Control/Right" to="." method="_on_right_pressed"]
+[connection signal="released" from="CollisionShape2D/Control/Right" to="." method="_on_right_released"]
+[connection signal="pressed" from="CollisionShape2D/Control/Left" to="." method="_on_left_pressed"]
+[connection signal="released" from="CollisionShape2D/Control/Left" to="." method="_on_left_released"]
+[connection signal="pressed" from="CollisionShape2D/Control/Down" to="." method="_on_down_pressed"]
+[connection signal="released" from="CollisionShape2D/Control/Down" to="." method="_on_down_released"]
+[connection signal="pressed" from="CollisionShape2D/Control/Attack" to="." method="_on_attack_pressed"]
+[connection signal="pressed" from="CollisionShape2D/Control/Glitch" to="." method="_on_glitch_pressed"]
+[connection signal="pressed" from="CollisionShape2D/Control/Bag" to="." method="_on_bag_pressed"]
