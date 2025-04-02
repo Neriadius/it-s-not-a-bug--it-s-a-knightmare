@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba3kdq31v2rki"]
+
+[ext_resource type="PackedScene" uid="uid://bq2sqb1u1l5ve" path="res://addons/virtual_joystick/test/test.tscn" id="1_wtcfe"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Test" parent="." instance=ExtResource("1_wtcfe")]

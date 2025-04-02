@@ -1,25 +1,43 @@
 extends CharacterBody2D
 
+const SPEED = 100.0
+var health = 100
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+@onready var anima = $CollisionShape2D/AnimatedSprite2D
 
-
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
+func _process(delta):
+	var movement = movement_vector()
+	var direction = movement.normalized()
+	velocity = SPEED * direction
+	
+	# Handle horizontal movement and animation state
+	if direction.length() > 0:
+		velocity.x = direction.x * SPEED
+		if velocity.y == 0:
+			anima.play("Run")
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+		velocity.x = move_toward(velocity.x, 0, SPEED * delta)  # Smooth deceleration
+		if velocity.y == 0:
+			anima.play("Idle")
+	
+	# Flip the sprite depending on movement direction
+	if direction.x < 0:
+		$CollisionShape2D/AnimatedSprite2D.flip_h = true
+	elif direction.x > 0:
+		$CollisionShape2D/AnimatedSprite2D.flip_h = false
+	
+	# Handle health and death
+	if health <= 0:
+		anima.play("Death")
+		await anima.animation_finished
+		queue_free()
+		# get_tree().change_scene_to_file("res://Scenes/menu.tscn")  # Uncomment to return to the menu
+		return  # Prevent further movement when the character is dead
+	
 	move_and_slide()
+
+func movement_vector():
+	var movement_x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	var movement_y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	return Vector2(movement_x, movement_y)
+	
