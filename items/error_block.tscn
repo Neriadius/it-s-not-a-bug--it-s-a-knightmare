@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7awx5haa7rqn"]
+
+[ext_resource type="Script" uid="uid://bonosxmej3wjx" path="res://items/error_block.gd" id="1_3p0x8"]
+[ext_resource type="Texture2D" uid="uid://drnfdpkb80b4v" path="res://Assets/Jam/ErrorBlock.png" id="1_5cbcp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5cbcp"]
+size = Vector2(76, 82)
+
+[node name="Error_block" type="Area2D"]
+script = ExtResource("1_3p0x8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5cbcp")
+
+[node name="ErrorBlock" type="Sprite2D" parent="."]
+position = Vector2(0, -3)
+texture = ExtResource("1_5cbcp")

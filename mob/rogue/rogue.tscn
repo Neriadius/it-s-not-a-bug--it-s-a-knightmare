@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://ci4q7vx1vbhra"]
+
+[ext_resource type="Texture2D" uid="uid://wgywa4r1kexc" path="res://mob/rogue/Attack.png" id="1_5orww"]
+[ext_resource type="Script" uid="uid://bwpdcae4wqa1s" path="res://mob/rogue/rogue.gd" id="1_q43ji"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pric4"]
+atlas = ExtResource("1_5orww")
+region = Rect2(86, 0, 43, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2u61"]
+atlas = ExtResource("1_5orww")
+region = Rect2(129, 0, 43, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ch56f"]
+atlas = ExtResource("1_5orww")
+region = Rect2(180, 0, 60, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gytr2"]
+atlas = ExtResource("1_5orww")
+region = Rect2(258, 0, 43, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65ye0"]
+atlas = ExtResource("1_5orww")
+region = Rect2(301, 0, 43, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_65ye0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pric4")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2u61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ch56f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gytr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65ye0")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8urfv"]
+radius = 6.41085
+height = 35.6158
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q43ji"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pric4"]
+radius = 31.0644
+
+[node name="rogue" type="CharacterBody2D"]
+script = ExtResource("1_q43ji")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(18, -19)
+sprite_frames = SubResource("SpriteFrames_65ye0")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.637411
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, -25)
+scale = Vector2(1.40387, 1.40387)
+shape = SubResource("CapsuleShape2D_8urfv")
+
+[node name="hit" type="Area2D" parent="." groups=["mobs"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit"]
+position = Vector2(-3, -25)
+scale = Vector2(1.06471, 2.16266)
+shape = SubResource("CircleShape2D_q43ji")
+
+[node name="finding" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="finding"]
+position = Vector2(16, -25)
+shape = SubResource("CircleShape2D_pric4")
+
+[connection signal="body_entered" from="hit" to="." method="_on_hit_body_entered"]
+[connection signal="body_entered" from="finding" to="." method="_on_finding_body_entered"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://camlwx5c71tb1"]
+
+[ext_resource type="Texture2D" uid="uid://0ch2usu31d1u" path="res://Assets/Jam/Shield.png" id="1_6i77j"]
+[ext_resource type="Script" uid="uid://ce1jw1pyuky3x" path="res://items/shield.gd" id="1_otmcp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6i77j"]
+
+[node name="Shield" type="Area2D"]
+script = ExtResource("1_otmcp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.46429, 2.46429)
+shape = SubResource("CircleShape2D_6i77j")
+
+[node name="Shield" type="Sprite2D" parent="."]
+position = Vector2(0, 3)
+texture = ExtResource("1_6i77j")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

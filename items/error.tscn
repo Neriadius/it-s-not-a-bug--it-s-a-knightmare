@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvbkt4843fjxg"]
+
+[ext_resource type="Texture2D" uid="uid://n8776qlun1a4" path="res://Assets/Jam/Error.png" id="1_m12l3"]
+[ext_resource type="Script" uid="uid://ch5ad6nffldc1" path="res://items/error.gd" id="1_wrvhm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2nral"]
+radius = 20.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3j5mb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_m12l3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Error" type="Area2D"]
+script = ExtResource("1_wrvhm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2nral")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3j5mb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

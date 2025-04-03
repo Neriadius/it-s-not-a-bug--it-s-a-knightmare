@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq2tqr6b12yfp"]
+
+[ext_resource type="Texture2D" uid="uid://dbtcm5jfrqisx" path="res://Assets/Jam/GlitchNeedle.png" id="1_x8o73"]
+
+[node name="GlitchNeedle" type="Sprite2D"]
+position = Vector2(23, -30)
+texture = ExtResource("1_x8o73")

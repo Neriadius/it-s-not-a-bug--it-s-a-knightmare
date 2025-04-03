@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcdqoss5fy5fp"]
+
+[ext_resource type="Texture2D" uid="uid://c8f54cxyvdk4k" path="res://Assets/Jam/Sword.png" id="1_y35re"]
+
+[node name="Sword" type="Sprite2D"]
+position = Vector2(33, -34)
+texture = ExtResource("1_y35re")

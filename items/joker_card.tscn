@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh23b3pacu1kd"]
+
+[ext_resource type="Texture2D" uid="uid://ugxj40upjb6l" path="res://Assets/Jam/JokerCard.png" id="1_pptst"]
+
+[node name="JokerCard" type="Sprite2D"]
+position = Vector2(29, -43)
+texture = ExtResource("1_pptst")
