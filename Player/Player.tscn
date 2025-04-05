@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://1ydcq6n23anp"]
+[gd_scene load_steps=98 format=3 uid="uid://1ydcq6n23anp"]
 
 [ext_resource type="Script" uid="uid://di4pyydlqn77h" path="res://Player/player.gd" id="1_q3lat"]
 [ext_resource type="Texture2D" uid="uid://df6wnv4ogbxvv" path="res://Player/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_q3lat"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://b2ogi0p2qt6x5" path="res://Assets/keybord and controller icons/individual sprites/controller/controller button 43.png" id="8_s1rgi"]
 [ext_resource type="Texture2D" uid="uid://qv07bugm5b1h" path="res://Assets/keybord and controller icons/individual sprites/controller/controller button 46.png" id="9_0j2ni"]
 [ext_resource type="Texture2D" uid="uid://dlsyktte042ts" path="res://Assets/keybord and controller icons/individual sprites/controller/controller button 45.png" id="10_v0k0e"]
-[ext_resource type="Texture2D" uid="uid://c5r65qog250ei" path="res://Assets/keybord and controller icons/individual sprites/controller/controller button 27.png" id="11_v0k0e"]
+[ext_resource type="Texture2D" uid="uid://cvajbcq5pq138" path="res://Assets/UI Icons/AttackButton.png" id="11_p7tob"]
+[ext_resource type="Texture2D" uid="uid://bfeipkbpnjn0v" path="res://Assets/UI Icons/GlitchButton1.png" id="12_dm7nj"]
+[ext_resource type="Texture2D" uid="uid://c6aixcadpa5em" path="res://Assets/UI Icons/FPSButton.png" id="13_3mea3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p7tob"]
 radius = 1.10099
@@ -412,7 +414,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_78fhc")
 }],
-"loop": true,
+"loop": false,
 "name": &"Death",
 "speed": 10.0
 }, {
@@ -613,19 +615,54 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0k0e"]
 radius = 29.5948
 
-[sub_resource type="GDScript" id="GDScript_v0k0e"]
-script/source = "extends Label
+[sub_resource type="Animation" id="Animation_p7tob"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 2]
+}
 
+[sub_resource type="Animation" id="Animation_dm7nj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	text = \"HP: \" + str($\"../..\".health)
-"
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3mea3"]
+_data = {
+&"RESET": SubResource("Animation_dm7nj"),
+&"attack": SubResource("Animation_p7tob")
+}
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_q3lat")
@@ -635,91 +672,105 @@ position = Vector2(2.84217e-14, -1.7053e-13)
 scale = Vector2(7.37421, 7.37421)
 shape = SubResource("CapsuleShape2D_p7tob")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" groups=["player"]]
 position = Vector2(0.770697, -3.5452)
-scale = Vector2(0.17203, 0.17203)
+scale = Vector2(0.171667, 0.170987)
 sprite_frames = SubResource("SpriteFrames_kne1u")
 animation = &"Attack"
 autoplay = "Idle"
+frame = 2
 
-[node name="Area2D" type="Area2D" parent="CollisionShape2D/AnimatedSprite2D"]
+[node name="Camera2D" type="Camera2D" parent="CollisionShape2D/AnimatedSprite2D"]
+position = Vector2(-4.48949, 20.7337)
+scale = Vector2(5.82523, 5.8484)
+zoom = Vector2(1.005, 1.005)
+process_callback = 0
+limit_left = -1
+limit_top = -581
+limit_right = 1904
+limit_bottom = 1038
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(5.68328, -26.143)
+scale = Vector2(1.26859, 1.26859)
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/AnimatedSprite2D/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(29.1504, 20.608)
+scale = Vector2(2.07206, 2.07206)
 shape = SubResource("CircleShape2D_v0k0e")
 
-[node name="Camera2D" type="Camera2D" parent="CollisionShape2D"]
-position = Vector2(-3.12922e-14, 1.87753e-13)
-scale = Vector2(1.101, 1.101)
-zoom = Vector2(1.005, 1.005)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Node2D" parent="CollisionShape2D"]
-position = Vector2(-3.12922e-14, 1.87753e-13)
-scale = Vector2(1.101, 1.101)
+[node name="Control" type="Node2D" parent="CanvasLayer"]
+position = Vector2(481, 366)
+scale = Vector2(8.119, 8.119)
 
-[node name="UP" type="TouchScreenButton" parent="CollisionShape2D/Control"]
+[node name="UP" type="TouchScreenButton" parent="CanvasLayer/Control"]
 position = Vector2(-19, 13)
 scale = Vector2(-0.232, -0.232)
 texture_normal = ExtResource("8_s1rgi")
 action = "up"
 
-[node name="Right" type="TouchScreenButton" parent="CollisionShape2D/Control"]
+[node name="Right" type="TouchScreenButton" parent="CanvasLayer/Control"]
 position = Vector2(-32, 10)
 scale = Vector2(0.231523, 0.231523)
 texture_normal = ExtResource("9_0j2ni")
 action = "right"
 
-[node name="Left" type="TouchScreenButton" parent="CollisionShape2D/Control"]
+[node name="Left" type="TouchScreenButton" parent="CanvasLayer/Control"]
 position = Vector2(-50, 10)
 scale = Vector2(0.232, 0.232)
 texture_normal = ExtResource("10_v0k0e")
 action = "left"
 
-[node name="Down" type="TouchScreenButton" parent="CollisionShape2D/Control"]
+[node name="Down" type="TouchScreenButton" parent="CanvasLayer/Control"]
 position = Vector2(-41, 17)
 scale = Vector2(0.232145, 0.232145)
 texture_normal = ExtResource("8_s1rgi")
 action = "down"
 
-[node name="Attack" type="TouchScreenButton" parent="CollisionShape2D/Control"]
-position = Vector2(23.1208, 2.94264)
-scale = Vector2(0.232, 0.232)
-texture_normal = ExtResource("11_v0k0e")
+[node name="ability" type="Node2D" parent="CanvasLayer"]
+position = Vector2(43, 24)
+
+[node name="Attack" type="TouchScreenButton" parent="CanvasLayer/ability"]
+position = Vector2(853, 309)
+scale = Vector2(1.88361, 1.88361)
+texture_normal = ExtResource("11_p7tob")
 action = "attack"
 
-[node name="Glitch" type="TouchScreenButton" parent="CollisionShape2D/Control"]
-position = Vector2(29, 19)
+[node name="Glitch" type="TouchScreenButton" parent="CanvasLayer/ability"]
+position = Vector2(772, 463)
+scale = Vector2(1.88361, 1.88361)
+texture_normal = ExtResource("12_dm7nj")
 action = "glitch"
 
-[node name="Bag" type="TouchScreenButton" parent="CollisionShape2D/Control"]
-position = Vector2(38, 19)
+[node name="Bag" type="TouchScreenButton" parent="CanvasLayer/ability"]
+position = Vector2(918.522, 463.261)
+scale = Vector2(1.88361, 1.88361)
+texture_normal = ExtResource("13_3mea3")
 action = "bag"
 
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = -968.0
-offset_top = -745.0
-offset_right = -928.0
-offset_bottom = -722.0
-script = SubResource("GDScript_v0k0e")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3mea3")
+}
 
 [connection signal="animation_finished" from="CollisionShape2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="body_entered" from="CollisionShape2D/AnimatedSprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="pressed" from="CollisionShape2D/Control/UP" to="." method="_on_up_pressed"]
-[connection signal="released" from="CollisionShape2D/Control/UP" to="." method="_on_up_released"]
-[connection signal="pressed" from="CollisionShape2D/Control/Right" to="." method="_on_right_pressed"]
-[connection signal="released" from="CollisionShape2D/Control/Right" to="." method="_on_right_released"]
-[connection signal="pressed" from="CollisionShape2D/Control/Left" to="." method="_on_left_pressed"]
-[connection signal="released" from="CollisionShape2D/Control/Left" to="." method="_on_left_released"]
-[connection signal="pressed" from="CollisionShape2D/Control/Down" to="." method="_on_down_pressed"]
-[connection signal="released" from="CollisionShape2D/Control/Down" to="." method="_on_down_released"]
-[connection signal="pressed" from="CollisionShape2D/Control/Attack" to="." method="_on_attack_pressed"]
-[connection signal="released" from="CollisionShape2D/Control/Attack" to="." method="_on_attack_released"]
-[connection signal="pressed" from="CollisionShape2D/Control/Glitch" to="." method="_on_glitch_pressed"]
-[connection signal="released" from="CollisionShape2D/Control/Glitch" to="." method="_on_glitch_released"]
-[connection signal="pressed" from="CollisionShape2D/Control/Bag" to="." method="_on_bag_pressed"]
-[connection signal="released" from="CollisionShape2D/Control/Bag" to="." method="_on_bag_released"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="pressed" from="CanvasLayer/Control/UP" to="." method="_on_up_pressed"]
+[connection signal="released" from="CanvasLayer/Control/UP" to="." method="_on_up_released"]
+[connection signal="pressed" from="CanvasLayer/Control/Right" to="." method="_on_right_pressed"]
+[connection signal="released" from="CanvasLayer/Control/Right" to="." method="_on_right_released"]
+[connection signal="pressed" from="CanvasLayer/Control/Left" to="." method="_on_left_pressed"]
+[connection signal="released" from="CanvasLayer/Control/Left" to="." method="_on_left_released"]
+[connection signal="pressed" from="CanvasLayer/Control/Down" to="." method="_on_down_pressed"]
+[connection signal="released" from="CanvasLayer/Control/Down" to="." method="_on_down_released"]
+[connection signal="pressed" from="CanvasLayer/ability/Attack" to="." method="_on_attack_pressed"]
+[connection signal="released" from="CanvasLayer/ability/Attack" to="." method="_on_attack_released"]
+[connection signal="pressed" from="CanvasLayer/ability/Glitch" to="." method="_on_glitch_pressed"]
+[connection signal="released" from="CanvasLayer/ability/Glitch" to="." method="_on_glitch_released"]
+[connection signal="pressed" from="CanvasLayer/ability/Bag" to="." method="_on_bag_pressed"]
+[connection signal="released" from="CanvasLayer/ability/Bag" to="." method="_on_bag_released"]

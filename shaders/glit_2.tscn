@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dubayqbsdmav0"]
+
+[ext_resource type="Shader" uid="uid://bfwxfr3bfyvbn" path="res://shaders/glitch_shade2.gdshader" id="1_h3a2n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vytvy"]
+shader = ExtResource("1_h3a2n")
+shader_parameter/red_displacement = 0.0
+shader_parameter/green_displacement = 0.0
+shader_parameter/blue_displacement = 0.0
+shader_parameter/ghost = 0.0
+shader_parameter/intensity = 0.0
+shader_parameter/scan_effect = 0.0
+shader_parameter/distortion_effect = 0.0
+shader_parameter/negative_effect = 0.0
+
+[node name="glit2" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_vytvy")
+offset_right = 40.0
+offset_bottom = 40.0

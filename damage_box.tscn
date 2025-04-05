@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgq7epwlwruet"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ctout"]
+
+[node name="DamageBox" type="Node2D"]
+
+[node name="Hurt Box" type="Area2D" parent="."]
+position = Vector2(28, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurt Box"]
+shape = SubResource("CircleShape2D_ctout")
+
+[node name="Hit Box" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hit Box"]
+shape = SubResource("CircleShape2D_ctout")

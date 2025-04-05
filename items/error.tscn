@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvbkt4843fjxg"]
+[gd_scene load_steps=6 format=3 uid="uid://cvbkt4843fjxg"]
 
 [ext_resource type="Texture2D" uid="uid://n8776qlun1a4" path="res://Assets/Jam/Error.png" id="1_m12l3"]
 [ext_resource type="Script" uid="uid://ch5ad6nffldc1" path="res://items/error.gd" id="1_wrvhm"]
+[ext_resource type="PackedScene" uid="uid://dlgusfj0lyxjh" path="res://shaders/glit.tscn" id="3_vkvt2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2nral"]
 radius = 20.0
@@ -21,9 +22,13 @@ animations = [{
 script = ExtResource("1_wrvhm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 25)
 shape = SubResource("CircleShape2D_2nral")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
 sprite_frames = SubResource("SpriteFrames_3j5mb")
+
+[node name="Glit" parent="." instance=ExtResource("3_vkvt2")]
+position = Vector2(21, 9)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
