@@ -114,7 +114,7 @@ func _process(delta: float) -> void:
 script/source = "extends Label
 
 func _process(delta: float) -> void:
-	text = \"COUNT: \" + str($\"../../Player\".kill_count) + \" / 1000\"
+	text = \"COUNT\" + str($\"../../Player\".kill_count)
 	
 "
 
@@ -168,10 +168,10 @@ texture_under = ExtResource("7_77x7w")
 texture_progress = ExtResource("8_xoyoh")
 
 [node name="KC" type="Label" parent="CanvasLayer"]
-offset_left = 972.0
-offset_top = 73.0
-offset_right = 1012.0
-offset_bottom = 96.0
+offset_left = 1036.0
+offset_top = 28.0
+offset_right = 1076.0
+offset_bottom = 51.0
 script = SubResource("GDScript_xoyoh")
 
 [connection signal="HP_changed" from="Player" to="." method="_on_player_hp_changed"]

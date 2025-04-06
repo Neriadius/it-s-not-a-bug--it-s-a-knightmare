@@ -15,6 +15,15 @@ run/main_scene="uid://4kndp1xv8qkc"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Signals="*res://Levels/signals.gd"
+
+[global_group]
+
+enemy=""
+player=""
+
 [input]
 
 ui_left={
@@ -86,6 +95,21 @@ bag={
 pointing/android/rotary_input_scroll_axis=0
 pointing/emulate_touch_from_mouse=true
 pointing/emulate_mouse_from_touch=false
+
+[layer_names]
+
+2d_render/layer_1="Player"
+2d_render/layer_2="Enemy"
+2d_render/layer_4="hutbox_en"
+2d_render/layer_5="hurtbox_play"
+2d_render/layer_7="hitbox_en"
+2d_render/layer_8="hitbox_play"
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_4="HurtEm"
+2d_physics/layer_5="HurtPlay"
+2d_physics/layer_7="HitEm"
+2d_physics/layer_8="HitPlay"
 
 [rendering]
 

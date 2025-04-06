@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://1ydcq6n23anp"]
+[gd_scene load_steps=100 format=3 uid="uid://1ydcq6n23anp"]
 
 [ext_resource type="Script" uid="uid://di4pyydlqn77h" path="res://Player/player.gd" id="1_q3lat"]
 [ext_resource type="Texture2D" uid="uid://df6wnv4ogbxvv" path="res://Player/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="2_q3lat"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cvajbcq5pq138" path="res://Assets/UI Icons/AttackButton.png" id="11_p7tob"]
 [ext_resource type="Texture2D" uid="uid://bfeipkbpnjn0v" path="res://Assets/UI Icons/GlitchButton1.png" id="12_dm7nj"]
 [ext_resource type="Texture2D" uid="uid://c6aixcadpa5em" path="res://Assets/UI Icons/FPSButton.png" id="13_3mea3"]
+[ext_resource type="PackedScene" uid="uid://bgq7epwlwruet" path="res://damage_box.tscn" id="14_dm7nj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p7tob"]
 radius = 1.10099
@@ -612,8 +613,46 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_v0k0e"]
-radius = 29.5948
+[sub_resource type="CircleShape2D" id="CircleShape2D_ctout"]
+
+[sub_resource type="Animation" id="Animation_dm7nj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageBox/Hurt Box/CollisionShape2D:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CircleShape2D_ctout")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageBox/Hurt Box/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_p7tob"]
 resource_name = "attack"
@@ -637,25 +676,34 @@ tracks/1/path = NodePath("CollisionShape2D/AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.4),
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.366667),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 2]
+"values": [0, 1, 2, 3]
 }
-
-[sub_resource type="Animation" id="Animation_dm7nj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D/AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageBox/Hurt Box/CollisionShape2D:shape")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.120883, 0.298025),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [2]
+"values": [SubResource("CircleShape2D_ctout"), SubResource("CircleShape2D_ctout")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DamageBox/Hurt Box/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.120123, 0.370251),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3mea3"]
@@ -663,6 +711,8 @@ _data = {
 &"RESET": SubResource("Animation_dm7nj"),
 &"attack": SubResource("Animation_p7tob")
 }
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3mea3"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_q3lat")
@@ -672,7 +722,7 @@ position = Vector2(2.84217e-14, -1.7053e-13)
 scale = Vector2(7.37421, 7.37421)
 shape = SubResource("CapsuleShape2D_p7tob")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" groups=["player"]]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
 position = Vector2(0.770697, -3.5452)
 scale = Vector2(0.171667, 0.170987)
 sprite_frames = SubResource("SpriteFrames_kne1u")
@@ -691,16 +741,6 @@ limit_right = 1904
 limit_bottom = 1038
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(5.68328, -26.143)
-scale = Vector2(1.26859, 1.26859)
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(29.1504, 20.608)
-scale = Vector2(2.07206, 2.07206)
-shape = SubResource("CircleShape2D_v0k0e")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -733,13 +773,8 @@ texture_normal = ExtResource("8_s1rgi")
 action = "down"
 
 [node name="ability" type="Node2D" parent="CanvasLayer"]
+visible = false
 position = Vector2(43, 24)
-
-[node name="Attack" type="TouchScreenButton" parent="CanvasLayer/ability"]
-position = Vector2(853, 309)
-scale = Vector2(1.88361, 1.88361)
-texture_normal = ExtResource("11_p7tob")
-action = "attack"
 
 [node name="Glitch" type="TouchScreenButton" parent="CanvasLayer/ability"]
 position = Vector2(772, 463)
@@ -753,13 +788,38 @@ scale = Vector2(1.88361, 1.88361)
 texture_normal = ExtResource("13_3mea3")
 action = "bag"
 
+[node name="Attack" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(896, 333)
+scale = Vector2(1.88361, 1.88361)
+texture_normal = ExtResource("11_p7tob")
+action = "attack"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_3mea3")
 }
 
+[node name="DamageBox" parent="." instance=ExtResource("14_dm7nj")]
+
+[node name="Hurt Box" parent="DamageBox" index="0"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="DamageBox/Hurt Box" index="0"]
+position = Vector2(25, 0)
+scale = Vector2(6.91634, 6.91634)
+shape = SubResource("CircleShape2D_ctout")
+disabled = false
+
+[node name="Hit Box" parent="DamageBox" index="1"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="DamageBox/Hit Box" index="0"]
+scale = Vector2(0.957787, 1.79936)
+shape = SubResource("CapsuleShape2D_3mea3")
+
 [connection signal="animation_finished" from="CollisionShape2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="pressed" from="CanvasLayer/Control/UP" to="." method="_on_up_pressed"]
 [connection signal="released" from="CanvasLayer/Control/UP" to="." method="_on_up_released"]
 [connection signal="pressed" from="CanvasLayer/Control/Right" to="." method="_on_right_pressed"]
@@ -768,9 +828,13 @@ libraries = {
 [connection signal="released" from="CanvasLayer/Control/Left" to="." method="_on_left_released"]
 [connection signal="pressed" from="CanvasLayer/Control/Down" to="." method="_on_down_pressed"]
 [connection signal="released" from="CanvasLayer/Control/Down" to="." method="_on_down_released"]
-[connection signal="pressed" from="CanvasLayer/ability/Attack" to="." method="_on_attack_pressed"]
-[connection signal="released" from="CanvasLayer/ability/Attack" to="." method="_on_attack_released"]
 [connection signal="pressed" from="CanvasLayer/ability/Glitch" to="." method="_on_glitch_pressed"]
 [connection signal="released" from="CanvasLayer/ability/Glitch" to="." method="_on_glitch_released"]
 [connection signal="pressed" from="CanvasLayer/ability/Bag" to="." method="_on_bag_pressed"]
 [connection signal="released" from="CanvasLayer/ability/Bag" to="." method="_on_bag_released"]
+[connection signal="pressed" from="CanvasLayer/Attack" to="." method="_on_attack_pressed"]
+[connection signal="released" from="CanvasLayer/Attack" to="." method="_on_attack_released"]
+[connection signal="area_entered" from="DamageBox/Hurt Box" to="." method="_on_hurt_box_area_entered"]
+[connection signal="body_entered" from="DamageBox/Hurt Box" to="." method="_on_hurt_box_body_entered"]
+
+[editable path="DamageBox"]

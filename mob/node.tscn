@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://br7orwslfn4hq"]
+
+[ext_resource type="Script" uid="uid://bpc248q4oq3fb" path="res://mob/node.gd" id="1_ywjno"]
+[ext_resource type="PackedScene" uid="uid://ci4q7vx1vbhra" path="res://mob/rogue/rogue.tscn" id="2_hxbhu"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_ywjno")
+rogue_scene = ExtResource("2_hxbhu")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

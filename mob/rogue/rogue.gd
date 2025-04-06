@@ -3,17 +3,20 @@ extends CharacterBody2D
 var SPEED = 80
 var alive = true
 var HP = 40
+var damage = 5
 var fight = false
 
 @onready var anima = $AnimatedSprite2D
 @onready var anim = $AnimationPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Signals.connect("player_attack", Callable(self, "_on_damage_received"))
+	add_to_group("enemy")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var play = get_tree().get_current_scene().get_node("Player") as Node2D
 	var direction = get_direction_to_player()
 	if alive == true:
 		velocity = SPEED * direction
@@ -21,16 +24,21 @@ func _process(delta: float) -> void:
 			$AnimatedSprite2D.flip_h = true
 		else:
 			$AnimatedSprite2D.flip_h = false
+	else:
+		velocity.x = 0
+		velocity.y = 0
 	
-	if HP == 0:
-		death()
+	if HP <= 0:
+		queue_free()
+		play.kill_count += 1
+		
 	
 	move_and_slide()
 
 func get_direction_to_player():
-	var player = get_tree().get_first_node_in_group("player") as Node2D
-	if player != null:
-		return (player.global_position - self.global_position).normalized()
+	var play = get_tree().get_current_scene().get_node("Player") as Node2D
+	if play != null:
+		return (play.global_position - self.global_position).normalized()
 	return Vector2.ZERO
 	
 func death():
@@ -39,11 +47,9 @@ func death():
 	queue_free()
 
 
-func _on_attack_body_entered(body: Node2D):
-	fight = true
-	if body.name == "Player":	
-		anim.play("Attack")
-		if body.shield > 0:
-			body.shield -=3
-		else:
-			body.health -= 5
+func _on_hurt_box_area_entered(area):
+	anim.play("Attack")
+	Signals.emit_signal("enemy_attack", damage)
+	
+func _on_damage_received(player_damage):
+	HP -= player_damage

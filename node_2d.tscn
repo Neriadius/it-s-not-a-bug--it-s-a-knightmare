@@ -1,7 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://ba3kdq31v2rki"]
 
-[ext_resource type="PackedScene" uid="uid://bq2sqb1u1l5ve" path="res://addons/virtual_joystick/test/test.tscn" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://bi44c8qsmlpih" path="res://node_2d.gd" id="1_wtcfe"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Load_screen" type="Node2D"]
+script = ExtResource("1_wtcfe")
 
-[node name="Test" parent="." instance=ExtResource("1_wtcfe")]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.277
+autostart = true
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

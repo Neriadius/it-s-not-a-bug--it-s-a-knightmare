@@ -1,17 +1,26 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
-var health = 300
-var hit = 20
+var SPEED = 300.0
+var max_health = 300
+var health
+var damage = 20
 var shield = 0
 var long_glitch = false
 var glitch = false
 var attacking = false
-var move_input = Vector2() # Хранит текущий ввод
+var move_input = Vector2()
+var kill_count
+
+signal HP_changed(new_health) 
 
 @onready var anima = $CollisionShape2D/AnimatedSprite2D
-@onready var area = $Area2D
 @onready var anim = $AnimationPlayer
+
+func _ready():
+	kill_count = 0
+	health = max_health
+	Signals.connect("enemy_attack", Callable(self, "_on_damage_received"))
+	#Signals.connect("player_attack", Callable(self, "_on_damage_received"))
 
 func _process(delta):
 	var movement = movement_vector()
@@ -86,11 +95,7 @@ func _on_attack_pressed():
 	if glitch == true or long_glitch == true:
 		anima.play("glitch_Attack")
 	else:
-		anim.play("attack")
-
-	for body in area.get_overlapping_bodies():
-		if body.name == "rogue":
-			body.health -= hit
+		anim.play("attack") 
 	
 func _on_glitch_pressed():
 	pass  # Здесь можно добавить логику глитча
@@ -127,4 +132,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "rogue":
 			if Input.is_action_just_pressed("attack"):
 				anim.play("attack")
-				body.health -= hit
+				body.health -= damage
+				
+func _on_damage_received(enemy_damage):
+	health -= enemy_damage
+	emit_signal("HP_changed", health)
+		
+
+
+func _on_hurt_box_area_entered(area: Area2D):
+	if Input.is_action_pressed("attack"):
+		Signals.emit_signal("player_attack", damage)
