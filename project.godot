@@ -23,6 +23,7 @@ Signals="*res://Levels/signals.gd"
 
 enemy=""
 player=""
+bandid=""
 
 [input]
 

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://78ttecdyysm"]
+
+[ext_resource type="Script" uid="uid://bufquqoudjajh" path="res://load_screen_2.gd" id="1_qrtqt"]
+[ext_resource type="Texture2D" uid="uid://4nn3qtaw8abl" path="res://Assets/ERRoR/photo_5447397976495483226_y.jpg" id="2_ov1vq"]
+[ext_resource type="Texture2D" uid="uid://dq4c46qvn8302" path="res://Assets/UI Icons/EmptyBar.png" id="3_ov1vq"]
+[ext_resource type="Texture2D" uid="uid://c68j8v3qqov10" path="res://Assets/UI Icons/ShieldBar.png" id="4_jgdkn"]
+
+[node name="Load_screen_2" type="Node2D"]
+script = ExtResource("1_qrtqt")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Photo5447397976495483226Y" type="Sprite2D" parent="."]
+position = Vector2(586, 325)
+texture = ExtResource("2_ov1vq")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -161.0
+offset_top = -38.0
+offset_right = 327.0
+offset_bottom = 26.0
+scale = Vector2(10.9337, 10.9337)
+texture_under = ExtResource("3_ov1vq")
+texture_progress = ExtResource("4_jgdkn")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

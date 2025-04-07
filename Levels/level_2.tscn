@@ -111,7 +111,7 @@ tile_set = SubResource("TileSet_arsda")
 position = Vector2(663, 475)
 
 [node name="Player" parent="." instance=ExtResource("8_pml6m")]
-position = Vector2(21, 503)
+position = Vector2(25, 630)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-170, 14)

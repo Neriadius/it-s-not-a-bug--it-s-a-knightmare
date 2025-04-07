@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d2c5pr8i17s61"
+path="res://.godot/imported/Techno Grape 2.mp3-12f8bec1bb9b4d60574ba047f1da53a6.mp3str"
+
+[deps]
+
+source_file="res://Assets/Jam/Techno Grape 2.mp3"
+dest_files=["res://.godot/imported/Techno Grape 2.mp3-12f8bec1bb9b4d60574ba047f1da53a6.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

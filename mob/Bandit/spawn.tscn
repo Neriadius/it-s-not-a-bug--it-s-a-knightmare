@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk71cyvf7hi7j"]
+
+[ext_resource type="Script" uid="uid://bj88cbd1xdgf1" path="res://node.gd" id="1_6owxb"]
+[ext_resource type="PackedScene" uid="uid://dsvey160qwnen" path="res://mob/Bandit/character_body_2d.tscn" id="2_2o8oa"]
+
+[node name="SPAWN" type="Node"]
+script = ExtResource("1_6owxb")
+rogue_scene = ExtResource("2_2o8oa")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

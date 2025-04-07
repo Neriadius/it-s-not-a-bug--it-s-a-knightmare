@@ -7,4 +7,4 @@ func _on_timer_timeout() -> void:
 		load.value = i
 		await get_tree().create_timer(0.01).timeout
 	if load.value == 100:
-		get_tree().change_scene_to_file("res://Levels/level_2.tscn")
+		get_tree().change_scene_to_file("res://Levels/level_4.tscn")

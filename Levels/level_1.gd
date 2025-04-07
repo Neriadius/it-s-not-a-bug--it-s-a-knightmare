@@ -9,5 +9,5 @@ func _ready():
 func _on_player_hp_changed(new_health: Variant) -> void:
 	health_bar.value = play.health
 	
-	if play.kill_count >= 10:
+	if play.kill_count >= 1000:
 		get_tree().change_scene_to_file("res://Levels/load_screen_1.tscn")

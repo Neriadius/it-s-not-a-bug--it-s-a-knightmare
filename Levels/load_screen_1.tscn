@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtx31epi300ic"]
+[gd_scene load_steps=5 format=3 uid="uid://dtx31epi300ic"]
 
 [ext_resource type="Script" uid="uid://bxsxkms6mv8qm" path="res://Levels/load_screen_1.gd" id="1_cq40c"]
+[ext_resource type="Texture2D" uid="uid://4nn3qtaw8abl" path="res://Assets/ERRoR/photo_5447397976495483226_y.jpg" id="2_od7h6"]
+[ext_resource type="Texture2D" uid="uid://dq4c46qvn8302" path="res://Assets/UI Icons/EmptyBar.png" id="3_od7h6"]
+[ext_resource type="Texture2D" uid="uid://bfeipkbpnjn0v" path="res://Assets/UI Icons/GlitchButton1.png" id="4_2hjej"]
 
 [node name="Load_screen1" type="Node2D"]
 script = ExtResource("1_cq40c")
@@ -8,5 +11,18 @@ script = ExtResource("1_cq40c")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="Photo5447397976495483226Y" type="Sprite2D" parent="."]
+position = Vector2(583, 334)
+texture = ExtResource("2_od7h6")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = 87.0
+offset_top = 110.0
+offset_right = 575.0
+offset_bottom = 174.0
+scale = Vector2(6.91135, 6.91135)
+texture_under = ExtResource("3_od7h6")
+texture_progress = ExtResource("4_2hjej")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

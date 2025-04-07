@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://dsvey160qwnen"]
+
+[ext_resource type="Script" uid="uid://dlvg4lytqwhnd" path="res://mob/Bandit/character_body_2d.gd" id="1_8y2hc"]
+[ext_resource type="Texture2D" uid="uid://cb5ge74epl84n" path="res://mob/Bandit/cyberpunk_knife_walk.png" id="1_iv404"]
+[ext_resource type="PackedScene" uid="uid://bgq7epwlwruet" path="res://damage_box.tscn" id="2_8y2hc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lgj71"]
+radius = 6.92951
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnn5t"]
+atlas = ExtResource("1_iv404")
+region = Rect2(0, 0, 42, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l86ne"]
+atlas = ExtResource("1_iv404")
+region = Rect2(42, 0, 42, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rsrc"]
+atlas = ExtResource("1_iv404")
+region = Rect2(84, 0, 42, 78)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yqsu3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnn5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l86ne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rsrc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="Bandit_knife" type="CharacterBody2D"]
+script = ExtResource("1_8y2hc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -4)
+scale = Vector2(1.4431, 1.6431)
+shape = SubResource("CapsuleShape2D_lgj71")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
+position = Vector2(-4.1577, 4.86883)
+scale = Vector2(0.692951, 0.608604)
+sprite_frames = SubResource("SpriteFrames_yqsu3")
+autoplay = "default"
+frame_progress = 0.624057
+
+[node name="DamageBox" parent="." instance=ExtResource("2_8y2hc")]
+
+[node name="Hurt Box" parent="DamageBox" index="0" groups=["bandid", "bandit"]]
+position = Vector2(-22, 0)
+collision_layer = 0
+collision_mask = 8
+
+[node name="Hit Box" parent="DamageBox" index="1"]
+collision_layer = 16
+collision_mask = 0
+
+[editable path="DamageBox"]

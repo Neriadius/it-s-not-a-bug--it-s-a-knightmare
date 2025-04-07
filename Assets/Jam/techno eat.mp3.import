@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://vl2lcdx7epdc"
+path="res://.godot/imported/techno eat.mp3-5326cc8b875e7d5060267a45e96e0fa2.mp3str"
+
+[deps]
+
+source_file="res://Assets/Jam/techno eat.mp3"
+dest_files=["res://.godot/imported/techno eat.mp3-5326cc8b875e7d5060267a45e96e0fa2.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
