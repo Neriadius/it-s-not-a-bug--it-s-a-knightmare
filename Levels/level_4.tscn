@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://b7lnybrebbail"]
+[gd_scene load_steps=18 format=4 uid="uid://b7lnybrebbail"]
 
 [ext_resource type="Script" uid="uid://dwfhy6vdjl7el" path="res://Levels/level_4.gd" id="1_ben3k"]
 [ext_resource type="PackedScene" uid="uid://dk71cyvf7hi7j" path="res://mob/Bandit/spawn.tscn" id="1_e78ah"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://ba0vc7nwoyq75" path="res://Assets/Shining Fields_free_v1.1/Sprites/Tileset/Soil decor.png" id="4_fqog2"]
 [ext_resource type="PackedScene" uid="uid://1ydcq6n23anp" path="res://Player/Player.tscn" id="7_waaef"]
 [ext_resource type="PackedScene" uid="uid://dlgusfj0lyxjh" path="res://shaders/glit.tscn" id="8_fqog2"]
+[ext_resource type="AudioStream" uid="uid://vl2lcdx7epdc" path="res://Assets/Jam/techno eat.mp3" id="10_77xid"]
+[ext_resource type="PackedScene" uid="uid://cvbkt4843fjxg" path="res://items/error.tscn" id="11_m0m22"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t60mx"]
 texture = ExtResource("1_nsqb1")
@@ -114,3 +116,20 @@ position = Vector2(744, 384)
 offset_right = 40.0
 offset_bottom = 23.0
 script = SubResource("GDScript_fqog2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_77xid")
+autoplay = true
+
+[node name="Error" parent="." instance=ExtResource("11_m0m22")]
+position = Vector2(641, 534)
+
+[node name="Error2" parent="." instance=ExtResource("11_m0m22")]
+position = Vector2(1145, 417)
+
+[node name="Error3" parent="." instance=ExtResource("11_m0m22")]
+position = Vector2(243, 289)
+
+[node name="Error4" parent="." instance=ExtResource("11_m0m22")]
+position = Vector2(1498, 275)
+scale = Vector2(1.5, 1.5)

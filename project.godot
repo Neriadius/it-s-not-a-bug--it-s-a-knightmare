@@ -13,11 +13,16 @@ config_version=5
 config/name="It's Not a Bug, It's a Knightmare"
 run/main_scene="uid://4kndp1xv8qkc"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://b88laje4uputj"
 
 [autoload]
 
 Signals="*res://Levels/signals.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [global_group]
 
@@ -116,3 +121,4 @@ pointing/emulate_mouse_from_touch=false
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

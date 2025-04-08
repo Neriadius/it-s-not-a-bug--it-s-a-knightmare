@@ -121,6 +121,7 @@ func _process(delta: float) -> void:
 "
 
 [node name="Level_1" type="Node2D"]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_xoyoh")
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -137,7 +138,7 @@ tile_set = SubResource("TileSet_rs4xw")
 [node name="Node" parent="mob" groups=["player"] instance=ExtResource("6_xoyoh")]
 
 [node name="Player" parent="." instance=ExtResource("5_syshm")]
-position = Vector2(950, 201)
+position = Vector2(962.667, 322.667)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -161,8 +162,7 @@ offset_top = -59.0
 offset_right = 64.0
 offset_bottom = 5.0
 scale = Vector2(3.72, 3.72)
-max_value = 300.0
-value = 300.0
+value = 100.0
 texture_under = ExtResource("7_77x7w")
 texture_progress = ExtResource("8_xoyoh")
 

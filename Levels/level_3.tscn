@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=4 uid="uid://c173ofvley2dr"]
+[gd_scene load_steps=26 format=4 uid="uid://c173ofvley2dr"]
 
 [ext_resource type="Script" uid="uid://c7hd0psjtfvij" path="res://Levels/level_3.gd" id="1_88iqf"]
 [ext_resource type="Texture2D" uid="uid://c1ephva6plsb0" path="res://Assets/Shining Fields_free_v1.1/Sprites/Tileset/Wooden path.png" id="1_uwxw1"]
 [ext_resource type="Texture2D" uid="uid://dciedujfp2dkr" path="res://Assets/Shining Fields_free_v1.1/Sprites/Tileset/Soil.png" id="2_ay5qi"]
 [ext_resource type="Texture2D" uid="uid://cw8luqws5hsm1" path="res://Assets/Jam/Background.png" id="2_oojpf"]
+[ext_resource type="Texture2D" uid="uid://dqb6xb8rb7jpm" path="res://Assets/Jam/photo_5451979469649735709_y.jpg" id="3_2urlj"]
 [ext_resource type="Texture2D" uid="uid://ba0vc7nwoyq75" path="res://Assets/Shining Fields_free_v1.1/Sprites/Tileset/Soil decor.png" id="3_fa81k"]
 [ext_resource type="Texture2D" uid="uid://btuka0bamjiob" path="res://Assets/Shining Fields_free_v1.1/Sprites/Tileset/Fields.png" id="4_ck3gp"]
 [ext_resource type="Texture2D" uid="uid://0raex5o2rtei" path="res://items/tiles.png" id="5_trpa2"]
@@ -144,12 +145,18 @@ func _on_player_hp_changed(new_health: Variant) -> void:
 "
 
 [node name="Level_3" type="Node2D"]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_88iqf")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(950, -133)
 scale = Vector2(4.03367, 2.78405)
 texture = ExtResource("2_oojpf")
+
+[node name="Photo5451979469649735709Y" type="Sprite2D" parent="."]
+position = Vector2(956, -683.333)
+scale = Vector2(2.00167, 2.00167)
+texture = ExtResource("3_2urlj")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 visible = false
@@ -181,8 +188,7 @@ offset_top = 11.0
 offset_right = 116.0
 offset_bottom = 75.0
 scale = Vector2(2.68, 2.68)
-max_value = 300.0
-value = 300.0
+value = 100.0
 texture_under = ExtResource("12_2urlj")
 texture_progress = ExtResource("13_88iqf")
 script = SubResource("GDScript_2urlj")

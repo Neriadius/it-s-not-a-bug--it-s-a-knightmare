@@ -1,12 +1,21 @@
-[gd_scene load_steps=16 format=3 uid="uid://ci4q7vx1vbhra"]
+[gd_scene load_steps=19 format=3 uid="uid://ci4q7vx1vbhra"]
 
 [ext_resource type="Texture2D" uid="uid://wgywa4r1kexc" path="res://mob/rogue/Attack.png" id="1_5orww"]
 [ext_resource type="Script" uid="uid://bwpdcae4wqa1s" path="res://mob/rogue/rogue.gd" id="1_q43ji"]
+[ext_resource type="Texture2D" uid="uid://brvku2c443ryp" path="res://mob/rogue/animation.png" id="2_h2u61"]
 [ext_resource type="PackedScene" uid="uid://bgq7epwlwruet" path="res://damage_box.tscn" id="3_pric4"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pric4"]
-atlas = ExtResource("1_5orww")
-region = Rect2(86, 0, 43, 80)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8urfv"]
+atlas = ExtResource("2_h2u61")
+region = Rect2(80, 0, 40, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fh3nk"]
+atlas = ExtResource("2_h2u61")
+region = Rect2(120, 0, 40, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4105"]
+atlas = ExtResource("2_h2u61")
+region = Rect2(160, 0, 40, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h2u61"]
 atlas = ExtResource("1_5orww")
@@ -28,9 +37,15 @@ region = Rect2(301, 0, 43, 80)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pric4")
+"texture": SubResource("AtlasTexture_8urfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fh3nk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4105")
 }],
-"loop": false,
+"loop": true,
 "name": &"Idle",
 "speed": 10.0
 }, {
@@ -152,9 +167,8 @@ script = ExtResource("1_q43ji")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(18, -19)
 sprite_frames = SubResource("SpriteFrames_65ye0")
-animation = &"new_animation"
+animation = &"Idle"
 autoplay = "Idle"
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, -25)

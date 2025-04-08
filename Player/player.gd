@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var SPEED = 300.0
-var max_health = 300
+var max_health = 100
 var health
 var damage = 20
 var shield = 0

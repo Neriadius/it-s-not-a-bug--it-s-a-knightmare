@@ -13,14 +13,15 @@ wait_time = 3.0
 autostart = true
 
 [node name="Photo5447397976495483226Y" type="Sprite2D" parent="."]
-position = Vector2(586, 325)
+position = Vector2(966, 542)
+scale = Vector2(1.64649, 1.64649)
 texture = ExtResource("2_ov1vq")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_left = -161.0
-offset_top = -38.0
-offset_right = 327.0
-offset_bottom = 26.0
+offset_left = 186.0
+offset_top = 154.0
+offset_right = 674.0
+offset_bottom = 218.0
 scale = Vector2(10.9337, 10.9337)
 texture_under = ExtResource("3_ov1vq")
 texture_progress = ExtResource("4_jgdkn")

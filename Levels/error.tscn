@@ -168,6 +168,8 @@ animations = [{
 }]
 
 [node name="ERROR" type="Node2D"]
+position = Vector2(54, 38)
+scale = Vector2(1.55713, 1.55713)
 script = ExtResource("1_f5puq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

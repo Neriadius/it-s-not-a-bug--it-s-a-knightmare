@@ -737,16 +737,16 @@ zoom = Vector2(1.005, 1.005)
 process_callback = 0
 limit_left = -1
 limit_top = -581
-limit_right = 1904
-limit_bottom = 1038
+limit_right = 2850
+limit_bottom = 1480
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Node2D" parent="CanvasLayer"]
-position = Vector2(481, 366)
-scale = Vector2(8.119, 8.119)
+position = Vector2(989, 454)
+scale = Vector2(19.376, 19.376)
 
 [node name="UP" type="TouchScreenButton" parent="CanvasLayer/Control"]
 position = Vector2(-19, 13)
@@ -789,8 +789,8 @@ texture_normal = ExtResource("13_3mea3")
 action = "bag"
 
 [node name="Attack" type="TouchScreenButton" parent="CanvasLayer"]
-position = Vector2(896, 333)
-scale = Vector2(1.88361, 1.88361)
+position = Vector2(1368, 542)
+scale = Vector2(5.76361, 5.76361)
 texture_normal = ExtResource("11_p7tob")
 action = "attack"
 

@@ -14,18 +14,21 @@ wait_time = 3.0
 autostart = true
 
 [node name="Photo5447397976495483226Y" type="Sprite2D" parent="."]
-position = Vector2(595, 330)
+position = Vector2(1002.37, 559.946)
+scale = Vector2(1.66953, 1.66953)
 texture = ExtResource("2_s3eqp")
 
+[node name="Glit" parent="." instance=ExtResource("5_1ayxh")]
+position = Vector2(9, 9)
+scale = Vector2(1.66953, 1.66953)
+
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_left = 107.0
-offset_top = 124.0
-offset_right = 595.0
-offset_bottom = 188.0
+offset_left = 442.0
+offset_top = 294.0
+offset_right = 930.0
+offset_bottom = 358.0
 scale = Vector2(6.79595, 6.79595)
 texture_under = ExtResource("3_c7har")
 texture_progress = ExtResource("4_s3eqp")
-
-[node name="Glit" parent="." instance=ExtResource("5_1ayxh")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
